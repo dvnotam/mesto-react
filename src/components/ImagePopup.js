@@ -5,7 +5,7 @@ const defaultCard = {
     link: '',
 }
 
-function PopupImage (props) {
+function ImagePopup (props) {
     const popupShow = props.card ? 'popup_open' : '';
 
     let card = props.card
@@ -26,4 +26,4 @@ function PopupImage (props) {
     )
 }
 
-export default PopupImage
+export default ImagePopup

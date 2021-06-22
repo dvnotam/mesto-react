@@ -6,7 +6,7 @@ import Footer from '../components/Footer.js';
 import PopupAvatarForm from "./PopupAvatarForm.js";
 import PopupAddCardForm from "./PopupAddCardForm.js";
 import PopupProfileForm from "./PopupProfileFrom.js";
-import PopupImage from './PopupImage.js';
+import ImagePopup from './ImagePopup.js';
 import PopupWithConfirm from "./PopupWithConfirm";
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
     <PopupAvatarForm isOpen={isEditAvatarPopupOpen} onClose={closePopups}/>
     <PopupProfileForm isOpen={isEditProfilePopupOpen} onClose={closePopups}/>
     <PopupAddCardForm isOpen={isAddPlacePopupOpen} onClose={closePopups}/>
-    <PopupImage card={selectedCard} onClose={closePopups}/>
+    <ImagePopup card={selectedCard} onClose={closePopups}/>
     <PopupWithConfirm />
   </div>
 );
