@@ -42,16 +42,16 @@ class Api {
             .then(this._checkResponse)
     }
 
-    getCounterLikes() {
-        return fetch(`${this._baseUrl}/cards`, {
+    deleteCard(id) {
+        return fetch(`${this._baseUrl}/cards/${id}`, {
+            method: 'DELETE',
             headers: this._headers
         })
             .then(this._checkResponse)
     }
 
-    deleteCard(id) {
-        return fetch(`${this._baseUrl}/cards/${id}`, {
-            method: 'DELETE',
+    getCounterLikes() {
+        return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
             .then(this._checkResponse)
@@ -71,6 +71,14 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
+    }
+
+    changeLikeCardStatus (id, isLiked) {
+        if (!isLiked) {
+            return this.deleteLike(id)
+        } else {
+            return this.getLike(id)
+        }
     }
 
     newAvatar(data) {
