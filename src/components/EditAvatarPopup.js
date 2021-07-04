@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
 
-function PopupAvatarForm (props) {
+function EditAvatarPopup (props) {
     const [ avatar, setAvatar ] = React.useState('')
 
     function handleSubmit(evt) {
@@ -27,4 +27,4 @@ function PopupAvatarForm (props) {
     )
 }
 
-export default PopupAvatarForm
+export default EditAvatarPopup

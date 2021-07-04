@@ -1,12 +1,12 @@
 import React from 'react';
 import '../index.css';
-import api from '../utils/Api.js'
+import api from '../utils/api.js'
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
 import Header from '../components/Header.js';
 import Main from '../components/Main.js';
 import Footer from './Footer.js';
-import PopupAvatarForm from "./PopupAvatarForm.js";
-import PopupProfileForm from "./PopupProfileFrom.js";
+import EditAvatarPopup from "./EditAvatarPopup.js";
+import PopupProfileForm from "./EditProfilePopup.js";
 import ImagePopup from './ImagePopup.js';
 import AddPlacePopup from "./AddPlacePopup.js";
 
@@ -119,7 +119,7 @@ function App() {
              cards={cards}
        />
        <Footer />
-       <PopupAvatarForm isOpen={isEditAvatarPopupOpen}
+       <EditAvatarPopup isOpen={isEditAvatarPopupOpen}
                         onClose={closePopups}
                         onNewAvatar={handleUpdateAvatar}
 
