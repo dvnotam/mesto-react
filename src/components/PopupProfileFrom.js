@@ -22,14 +22,15 @@ function PopupProfileForm (props) {
 
     function handleSubmit (evt) {
         evt.preventDefault()
+
         props.onNewUser({
-            name:name,
-            status: about
+            name: name,
+            about: about
         })
     }
 
     return (
-        <PopupWithForm name='profile-form' title='Редактировать профиль' buttonSubmit='Сохранить' onSubmite={handleSubmit} isLoading={props.isLoading} isOpenPopup={props.isOpen} onClosePopup={props.onClose}>
+        <PopupWithForm name='profile-form' title='Редактировать профиль' buttonSubmit='Сохранить' onSubmit={handleSubmit} isLoading={props.isLoading} isOpenPopup={props.isOpen} onClosePopup={props.onClose}>
             <input id="name" type="text" name="name" className="popup__item popup__item_profile-name" placeholder="Имя"
                    value={name || ''} onChange={handleNewName} required minLength="2" maxLength="40" />
             <span id="name-error" className="popup__error" />

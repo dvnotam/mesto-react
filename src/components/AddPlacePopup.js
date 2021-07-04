@@ -24,13 +24,20 @@ function AddPlacePopup (props) {
         setLink('')
     }
 
+    function validCloseButton () {
+        props.onClose()
+
+        setTitle('')
+        setLink('')
+    }
+
     return (
-        <PopupWithForm name="card" title="Новое место" buttonText="Добавить" onSubmit={handleSubmit} isOpen={props.isOpen} onClose={props.onClose}>
+        <PopupWithForm name='photo-form' title="Новое место" buttonSubmit="Добавить" onSubmit={handleSubmit} isOpenPopup={props.isOpen} onClosePopup={validCloseButton}>
             <input id="photo-name" type="text" name="name" className="popup__item popup__item_photo-name"
                     onChange={handleChangeTitle} value={title || ''} placeholder="Название" required minLength="2" maxLength="30" />
             <span id="photo-name-error" className="popup__error" />
             <input id="photo" type="url" name="link" className="popup__item popup__item_photo"
-                   onChange={handleChangeLink} placeholder="Ссылка на картинку" required />
+                   onChange={handleChangeLink} value={link || ''} placeholder="Ссылка на картинку" required />
             <span id="photo-error" className="popup__error" />
         </PopupWithForm>
     )

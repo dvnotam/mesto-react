@@ -19,12 +19,14 @@ function Card(props) {
         props.onCardLike(props.card);
     }
     function handleDeleteClick() {
-        props.onCardDelete(props.card);
+        props.onCardDelete(props.card._id);
     }
     return (
         <div className="element">
             <img className="element__photo" src={props.card.link} alt={props.card.name} onClick={handleClick}/>
-            <button type="button" className={cardDeleteButtonClassName} onClick={handleDeleteClick} />
+            {
+                isOwn && <button type="button" className={cardDeleteButtonClassName} onClick={handleDeleteClick} />
+            }
             <div className="element__content">
                 <h2 className='element__title'>{props.card.name}</h2>
                 <div className="element__group">

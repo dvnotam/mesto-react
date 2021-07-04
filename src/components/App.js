@@ -8,19 +8,17 @@ import Footer from './Footer.js';
 import PopupAvatarForm from "./PopupAvatarForm.js";
 import PopupProfileForm from "./PopupProfileFrom.js";
 import ImagePopup from './ImagePopup.js';
-import PopupWithConfirm from "./PopupWithConfirm";
 import AddPlacePopup from "./AddPlacePopup.js";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isConfirmOpenPopup, setIsConfirmOpenPopup] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
-  const [cardDeleteId, setCardDeleteId] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({})
   const [cards, setCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+
 
   React.useEffect(() => {
     Promise.all([
@@ -34,19 +32,24 @@ function App() {
         .catch((err) => console.log(err))
   }, []);
 
+
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true)
   }
+
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true)
   }
+
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true)
-    console.log(setIsAddPlacePopupOpen)
+    console.log(isAddPlacePopupOpen)
   }
+
   function handleCardClick(card) {
     setSelectedCard(card);
   }
+
   function handleUpdateUser(data){
     setIsLoading(true)
     api.setUserInfo(data)
@@ -57,6 +60,7 @@ function App() {
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
   }
+
   function handleAddPlaceSubmit(data){
     setIsLoading(true)
     api.newCard(data)
@@ -67,6 +71,7 @@ function App() {
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
   }
+
   function handleUpdateAvatar(data){
     setIsLoading(true)
     api.newAvatar(data)
@@ -77,22 +82,15 @@ function App() {
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
   }
-  function handleCardDelete(card){
-    setIsConfirmOpenPopup(true)
-    setCardDeleteId(card);
+
+  function handleCardDelete(id) {
+    api.deleteCard( id)
+        .then(() => {
+          setCards(cards.filter(c => c._id !== id))
+        })
+
   }
 
-  function handleCardDeleteConfirm(card) {
-    setIsLoading(true)
-    api.deleteCard(card._id)
-        .then(() => {
-          const newCards = cards.filter(item => item !== card)
-          setCards(newCards)
-          closePopups()
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setIsLoading(false))
-  }
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
@@ -100,11 +98,11 @@ function App() {
     })
         .catch((err) => console.log(err))
   }
+
   function closePopups() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setIsConfirmOpenPopup(false)
     setSelectedCard(null);
   }
 
@@ -135,12 +133,6 @@ function App() {
                       onClose={closePopups}
                       isLoading={isLoading}
                       onAddCard={handleAddPlaceSubmit}
-       />
-       <PopupWithConfirm isOpen={isConfirmOpenPopup}
-                         onClose={closePopups}
-                         cardId={cardDeleteId}
-                         onHandleCardDeleteConfirm={handleCardDeleteConfirm}
-                         isLoading={isLoading}
        />
        <ImagePopup card={selectedCard}
                    onClose={closePopups}

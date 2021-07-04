@@ -9,7 +9,7 @@ function PopupWithForm (props) {
                 <h2 className="popup__title">{props.title}</h2>
                 <form className={`popup__form popup__form_${props.name}`}>
                     {props.children}
-                    <input type="submit" className="popup__button popup__button_disabled" disabled={true}
+                    <input onClick={props.onSubmit} type="submit" className="popup__button"
                            value={`${props.buttonSubmit}`} />
                 </form>
             </div>
