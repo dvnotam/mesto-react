@@ -30,7 +30,7 @@ class Api {
             .then(this._checkResponse)
     }
 
-    newCard(data) {
+    addCard(data) {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: this._headers,
@@ -50,14 +50,7 @@ class Api {
             .then(this._checkResponse)
     }
 
-    getCounterLikes() {
-        return fetch(`${this._baseUrl}/cards`, {
-            headers: this._headers
-        })
-            .then(this._checkResponse)
-    }
-
-    getLike(id) {
+    addLike(id) {
         return fetch(`${this._baseUrl}/cards/likes/${id}`, {
             method: 'PUT',
             headers: this._headers
@@ -77,11 +70,11 @@ class Api {
         if (!isLiked) {
             return this.deleteLike(id)
         } else {
-            return this.getLike(id)
+            return this.addLike(id)
         }
     }
 
-    newAvatar(data) {
+    updateAvatar(data) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,

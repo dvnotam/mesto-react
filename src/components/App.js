@@ -63,9 +63,9 @@ function App() {
 
   function handleAddPlaceSubmit(data){
     setIsLoading(true)
-    api.newCard(data)
-        .then(newCard => {
-          setCards([newCard, ...cards])
+    api.addCard(data)
+        .then(addCard => {
+          setCards([addCard, ...cards])
           closePopups()
         })
         .catch((err) => console.log(err))
@@ -74,7 +74,7 @@ function App() {
 
   function handleUpdateAvatar(data){
     setIsLoading(true)
-    api.newAvatar(data)
+    api.updateAvatar(data)
         .then(avatar => {
           setCurrentUser(avatar)
           closePopups()
@@ -88,13 +88,14 @@ function App() {
         .then(() => {
           setCards(cards.filter(c => c._id !== id))
         })
+        .catch((err) => console.log(err))
 
   }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
+    api.changeLikeCardStatus(card._id, !isLiked).then((addCard) => {
+      setCards((cards) => cards.map((c) => c._id === card._id ? addCard : c));
     })
         .catch((err) => console.log(err))
   }
